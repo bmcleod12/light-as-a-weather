@@ -18,16 +18,106 @@
     
     
     <div class="container">
-        <h2>Search for a City</h2>
-
-        <form class="row g-3">
+      <div class="row">
+        <div class="col-3">
+          <h3>Search for a City</h3>
+          <!-- <form>
             <div class="col-auto">
-              <input type="text" class="form-control" id="search-city" placeholder="City">
+            <input type="text" class="form-control" id="search-city" placeholder="City">
             </div>
             <div class="col-auto">
               <button type="submit" class="btn btn-info mb-3 fas fa-search" id="search"></button>
             </div>
-          </form>
+          </form> -->
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="search-city" placeholder="City" aria-label="Search City">
+            <button class="btn btn-info fas fa-search" type="button" id="search"></button>
+          </div>
+
+        </div>
+
+        <div class="col-9">
+          <div class="row">
+            <h1>Current Weather</h1>
+              <div class="card">
+                <div class="card-body" id="current-weather-card">
+                  <h2 class="card-title">Olathe, Snowy Day<img src="http://openweathermap.org/img/wn/13n@2x.png" width="60px" height="60px" alt=""></img></h2>
+                  <h4 class="card-subtitle mb-2">1/19/2021</h4>
+                  <p class="card-text">Temperature: </p>
+                  <p class="card-text">Humidity: </p>
+                  <p class="card-text">Wind Speed: </p>
+                  <p class="card-text">UV Index: </p>
+                </div>
+              </div>
+          </div>
+
+          <div class="row">
+            <h3>5 Day Forecast</h3>
+            <div class="col-2">
+              <div class="card">
+                <h5 class="card-header">Day 1</h5>
+                <div class="card-body">
+                  <p class="card-text">Icon: </p>
+                  <p class="card-text">Temp: </p>
+                  <p class="card-text">Humidity: </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-2">
+              <div class="card">
+                <h5 class="card-header">Day 2</h5>
+                <div class="card-body">
+                  <p class="card-text">Icon: </p>
+                  <p class="card-text">Temp: </p>
+                  <p class="card-text">Humidity: </p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-2">
+              <div class="card">
+                <h5 class="card-header">Day 3</h5>
+                <div class="card-body">
+                  <p class="card-text">Icon: </p>
+                  <p class="card-text">Temp: </p>
+                  <p class="card-text">Humidity: </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="card">
+                <h5 class="card-header">Day 4</h5>
+                <div class="card-body">
+                  <p class="card-text">Icon: </p>
+                  <p class="card-text">Temp: </p>
+                  <p class="card-text">Humidity: </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-2">
+              <div class="card">
+                <h5 class="card-header">Day 5</h5>
+                <div class="card-body">
+                  <p class="card-text">Icon: </p>
+                  <p class="card-text">Temp: </p>
+                  <p class="card-text">Humidity: </p>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+      </div>  
+
+
+
 
         <!-- today -->
         <p id="current-city-and-date"></p>
@@ -36,17 +126,8 @@
         <p id="humidity"></p>
         <p id="wind-speed"></p>
         <p id="uv-index"></p>
+        <!-- <img src="http://openweathermap.org/img/wn/13n@2x.png" width="80px" height="80px" alt=""></img> -->
 
-        <!-- future days  -->
-        <p id="day-1"></p>
-          Date
-          icon
-          temp
-          humidity
-        <p id="day-2"></p>
-        <p id="day-3"></p>
-        <p id="day-4"></p>
-        <p id="day-5"></p>
     </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>
