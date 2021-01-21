@@ -44,7 +44,7 @@ $(document).ready(function(){
                 }).then(function(response) { 
 
                     // references HTML IDs to display API data on screen
-                    $("#current-city-header").text(cityName+ ", " + response.current.weather[0].main).append($("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.current.weather[0].icon + "@2x.png").attr("width","60px").attr("height", "60px"));
+                    $("#current-city-header").text(cityName+ ", " + response.current.weather[0].main).append($("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.current.weather[0].icon + "@2x.png").attr("width","60px").attr("height", "60px"));
                     $("#current-temp").text(response.current.temp);
                     $("#current-humidity").text(response.current.humidity);
                     $("#current-wind-speed").text(response.current.wind_speed);
