@@ -39,7 +39,7 @@ $(document).ready(function(){
             renderCityList();
 
             $.ajax({
-                url: "http://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&units=imperial&appid=c8dda36408a8eec1bd2b3381270f38a9",
+                url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&units=imperial&appid=c8dda36408a8eec1bd2b3381270f38a9",
                 method: "GET"
                 }).then(function(response) { 
 
