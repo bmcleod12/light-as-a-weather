@@ -2,6 +2,8 @@ var cityList = [];
 
 $(document).ready(function(){
 
+    init();
+
     // Prevents the enter key from submitting the form and allows it to call the API
     $("#search-city").keydown(function (event) {
     if (event.keyCode == 13) {
@@ -12,6 +14,13 @@ $(document).ready(function(){
     // Listens for the click on the search icon and calls the API
     $("#search").on("click", function(event) {
         event.preventDefault();
+        callAPI();
+    });
+
+    // need to figure out how to dynamically grab the city that is clicked to add to search-city.
+    $("#searched-cities").on("click", function(event) {
+        event.preventDefault();
+        $("#search-city").val("Miami");
         callAPI();
     });
         
@@ -31,17 +40,20 @@ $(document).ready(function(){
             var cityName = response.city.name;
 
             // adds cityName to the cityList array
-            cityList.push(cityName);
+            cityList.unshift(cityName);
             
             // clears search input
             $("#search-city").val("");
             
+            storeCityList();
             renderCityList();
 
             $.ajax({
                 url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&units=imperial&appid=c8dda36408a8eec1bd2b3381270f38a9",
                 method: "GET"
                 }).then(function(response) { 
+                    console.log(response);
+                    $("#forecast-wrapper").empty();
 
                     // references HTML IDs to display API data on screen
                     $("#current-city-header").text(cityName+ ", " + response.current.weather[0].main).append($("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.current.weather[0].icon + "@2x.png").attr("width","60px").attr("height", "60px"));
@@ -72,10 +84,41 @@ $(document).ready(function(){
                     if(currentUVIndex > 11) {
                         $("#uv-index").addClass("badge").css("background-color", "purple").text(currentUVIndex);
                     }
+
+                    // 5 day forecast element creation
+
+                    for(var i = 1; i < 6; i++) {
+                        
+
+                        var futureWeather = $("<p>").text(response.daily[i].weather[0].main).append($("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.daily[i].weather[0].icon + "@2x.png").attr("width","35px").attr("height", "35px"));
+                        var futureTemp = $("<p>").text("Temp: " + response.daily[i].temp.day + "°F");
+                        var futureHumidity = $("<p>").text("Humidity: " + response.daily[i].humidity + "%"); 
+
+                        $("#forecast-wrapper").append($("<div>").addClass("col-auto").
+                            append($("<div>").addClass("card mb-4").
+                            append($("<h5>").addClass("card-header bg-info").css("color", "white").text("Day " + i)).
+                            append($("<div>").addClass("card-body").append(futureWeather, futureTemp, futureHumidity))));
+                    }
+
                 });
         });
     };
 
+    function init() {
+        var storedCityList = JSON.parse(localStorage.getItem("cityList"));
+        console.log("init: " + storedCityList);
+
+        if (storedCityList !== null) {
+            cityList = storedCityList;
+        }
+
+        renderCityList();
+    }
+
+    function storeCityList() {
+        localStorage.setItem("cityList", JSON.stringify(cityList));
+        console.log("local storage: " + cityList);
+    }
 
     function renderCityList() {
 
@@ -86,7 +129,9 @@ $(document).ready(function(){
 
             var city = cityList[i];
 
-            var searchedCity = $("<li>").text(city);
+            var searchedCity = $("<a>").attr("href", "#").attr("id", i + "-storedCity").addClass("list-group-item list-group-item-action list-group-item-success").text(city);
+
+            $("#0-storedCity").addClass("active");
 
             $("#searched-cities").append(searchedCity);
             
@@ -115,3 +160,7 @@ $(document).ready(function(){
             // console.log("Wind Speed: " + response.current.wind_speed);
             // console.log("Current Description: " + response.current.weather[0].main);
             // console.log("Icon ID: " + response.current.weather[0].icon);
+            // console.log(response.daily[1].temp.day);
+            // console.log(response.daily[1].humidity);
+            // console.log(response.daily[1].weather[0].main);
+            // console.log(response.daily[1].weather[0].icon);
