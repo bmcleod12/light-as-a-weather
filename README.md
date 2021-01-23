@@ -44,7 +44,9 @@ Search for cities with varying capitalization (ex: nEw YOrk) and confirm that th
 ## Credits
 
 Open Weather API was used for the weather data: https://openweathermap.org/api
+
 Bootstrap was used to design the UI: https://getbootstrap.com/ 
+
 The EPA's site for the UV Index scale was used to determine which color of badges to display based on the UV Index for the day: https://www.epa.gov/sunsafety/uv-index-scale-0
 
 ## License
