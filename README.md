@@ -4,8 +4,11 @@ https://bmcleod12.github.io/light-as-a-weather/
 
 ## Description
 
+This weather dashboard can be used to search for today's weather, as well as a preview weather for the next 5 days, in your city of choice. It maintains a list of cities you have searched to allow you to quickly pull up data on other cities of interest.
 
 ## Installation
+
+This project was created using Bootstrap for the UI and Open Weather API for the data. It primarily uses jQuery to run the API calls and dynamically display information based on the selected city.
 
 ## Usage
 
@@ -27,7 +30,7 @@ After refreshing your page in the browser, the list of cities you previously sea
 
 <img alt="Empty dashboard" src="assets/refreshed_dashboard.PNG"/>
 
-## Tests and Known Issues
+## Tests
 
 Test 1:
 Open this application in different browsers and change the viewport size to confirm the page elements are responsive.
@@ -40,6 +43,8 @@ Search for cities with varying capitalization (ex: nEw YOrk) and confirm that th
 
 ## Credits
 
+Open Weather API was used for the weather data: https://openweathermap.org/api
+Bootstrap was used to design the UI: https://getbootstrap.com/ 
 The EPA's site for the UV Index scale was used to determine which color of badges to display based on the UV Index for the day: https://www.epa.gov/sunsafety/uv-index-scale-0
 
 ## License
