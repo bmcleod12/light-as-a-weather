@@ -17,11 +17,20 @@ $(document).ready(function(){
         callAPI();
     });
 
-    // need to figure out how to dynamically grab the city that is clicked to add to search-city.
-    $("#searched-cities").on("click", function(event) {
+    // clears the city list and refreshes the page
+    $("#clearSearch").on("click", function(event) {
         event.preventDefault();
-        $("#search-city").val("Miami");
-        callAPI();
+        window.localStorage.clear();
+        location.reload();
+    });
+
+    // this only works for one click
+    $("li").on("click", function (event) {
+            event.preventDefault();
+            // console.log("clicked");
+            $("#search-city").val(this.innerHTML);
+            callAPI();
+            // location.reload();
     });
         
     function callAPI() {
@@ -39,8 +48,8 @@ $(document).ready(function(){
             var longitude = response.city.coord.lon;
             var cityName = response.city.name;
 
-            // adds cityName to the cityList array
-            cityList.unshift(cityName);
+            // adds cityName to the cityList array only if it doesn't already exist in the array
+            if (cityList.includes(cityName) === false) cityList.unshift(cityName);
             
             // clears search input
             $("#search-city").val("");
@@ -113,6 +122,18 @@ $(document).ready(function(){
         }
 
         renderCityList();
+
+        // stopped here for now
+        var fullDate = new Date()
+        console.log(fullDate);
+         
+        //convert month to 2 digits
+        var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+         
+        var currentDate = fullDate.getDate() + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
+        console.log(currentDate);
+        //19/05/2011
+
     }
 
     function storeCityList() {
@@ -121,7 +142,6 @@ $(document).ready(function(){
     }
 
     function renderCityList() {
-
         // clears the left panel before creating an element for each object in the cityList array
         $("#searched-cities").empty();
 
@@ -129,7 +149,7 @@ $(document).ready(function(){
 
             var city = cityList[i];
 
-            var searchedCity = $("<a>").attr("href", "#").attr("id", i + "-storedCity").addClass("list-group-item list-group-item-action list-group-item-success").text(city);
+            var searchedCity = $("<li>").attr("id", i + "-storedCity").addClass("list-group-item list-group-item-action list-group-item-success").text(city);
 
             $("#0-storedCity").addClass("active");
 
